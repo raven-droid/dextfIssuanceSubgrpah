@@ -1,0 +1,104 @@
+specVersion: 0.0.2
+description: Dextf Issuance Module
+repository: https://github.com/raven-droid/dextfIssuanceSubgrpah.git
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SetToken
+    network: mainnet
+    source:
+      address: '0x0000000000000000000000000000000000000000'
+      abi: SetToken
+      startBlock: 10700000
+    mapping:
+      kind: ethereum/eventHandlers
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/SetToken.ts
+      entities:
+        - SetToken
+        - StandardToken
+      abis:
+        - name: SetToken
+          file: ./abis/SetToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleEverything
+        - event: ComponentAdded(indexed address)
+          handler: handleEverything
+        - event: ComponentRemoved(indexed address)
+          handler: handleEverything
+        - event: DefaultPositionUnitEdited(indexed address,int256)
+          handler: handleEverything
+        - event: ExternalPositionDataEdited(indexed address,indexed address,bytes)
+          handler: handleEverything
+        - event: ExternalPositionUnitEdited(indexed address,indexed address,int256)
+          handler: handleEverything
+        - event: Invoked(indexed address,indexed uint256,bytes,bytes)
+          handler: handleEverything
+        - event: ManagerEdited(address,address)
+          handler: handleEverything
+        - event: ModuleAdded(indexed address)
+          handler: handleEverything
+        - event: ModuleInitialized(indexed address)
+          handler: handleEverything
+        - event: ModuleRemoved(indexed address)
+          handler: handleEverything
+        - event: PendingModuleRemoved(indexed address)
+          handler: handleEverything
+        - event: PositionModuleAdded(indexed address,indexed address)
+          handler: handleEverything
+        - event: PositionModuleRemoved(indexed address,indexed address)
+          handler: handleEverything
+        - event: PositionMultiplierEdited(int256)
+          handler: handleEverything
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleEverything
+  - kind: ethereum/contract
+    name: SetTokenCreator
+    network: mainnet
+    source:
+      address: '0x8CB9E7BdD78926933FC9D19F5F69fEFC2B737087'
+      abi: SetTokenCreator
+      startBlock: 10700000
+    mapping:
+      kind: ethereum/eventHandlers
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/SetTokenCreator.ts
+      entities:
+        - SetToken
+        - StandardToken
+      abis:
+        - name: SetTokenCreator
+          file: ./abis/SetTokenCreator.json
+        - name: SetToken
+          file: ./abis/SetToken.json
+      eventHandlers:
+        - event: SetTokenCreated(indexed address,address,string,string)
+          handler: handleSetTokenCreated
+  - kind: ethereum/contract
+    name: BasicIssuanceModule
+    network: mainnet
+    source:
+      address: '0xd8EF3cACe8b4907117a45B0b125c68560532F94D'
+      abi: BasicIssuanceModule
+      startBlock: 10700000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/BasicIssuanceModule.ts
+      entities:
+        - Account
+      abis:
+        - name: BasicIssuanceModule
+          file: ./abis/BasicIssuanceModule.json
+        - name: SetToken
+          file: ./abis/SetToken.json
+      eventHandlers:
+        - event: SetTokenIssued(indexed address,indexed address,indexed address,address,uint256)
+          handler: handleSetTokenIssued
+        - event: SetTokenRedeemed(indexed address,indexed address,indexed address,uint256)
+          handler: handleSetTokenRedeemed

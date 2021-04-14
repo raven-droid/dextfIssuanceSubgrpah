@@ -1,0 +1,22 @@
+type BalanceSheet @entity {
+    id: ID! # account-setToken is the key
+    account: String!
+    setToken: SetToken!
+    balance: BigInt!
+}
+
+type SetToken @entity {
+    id: ID! #also SetToken's address
+    name: String!
+    symbol: String!
+    manager: String!
+    components: [StandardToken!]!
+    units: [BigInt!]!
+    decimals: Int!
+}
+
+type StandardToken @entity {
+    id: ID! # also Standard Token's address
+    name: String!
+    symbol: String!
+}

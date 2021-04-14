@@ -1,0 +1,25 @@
+{
+  "name": "dextf_issuance",
+  "version": "1.0.0",
+  "scripts": {
+    "create": "graph create raven-droid/dextf-issuance --node https://api.thegraph.com/deploy/",
+    "create-local": "graph create raven-droid/dextf-issuance --node http://127.0.0.1:8000",
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --debug --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ raven-droid/dextf-issuance",
+    "deploy-local": "graph deploy raven-droid/dextf-issuance --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "prettier": "prettier --write '**/*.{ts,js,css,html,json}'",
+    "auth": "graph auth https://api.thegraph.com/deploy/ bc7f5293ff2d444483c830c551f3b4de"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.19.0",
+    "@graphprotocol/graph-ts": "^0.19.0",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0"
+  },
+  "repository": "https://github.com/raven-droid/dextfIssuanceSubgrpah.git",
+  "license": "MIT"
+}
